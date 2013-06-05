@@ -1,4 +1,4 @@
-This app will map out where your friends are from across the world.
+This app will map out where your friends are located across the world.
 
 More importantly, it provides practice in reading developer documentation.
 
