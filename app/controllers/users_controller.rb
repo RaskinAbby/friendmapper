@@ -4,11 +4,6 @@ class UsersController < ApplicationController
   def require_authorized_user
     @user = User.find(params[:id])
 
-    logger.debug "="*80
-    logger.debug "#{@user.id}"
-    logger.debug "#{current_user.id}"
-    logger.debug "="*80
-
     if @user != current_user
       redirect_to root_url, flash: { alert: "Not authorized for that." }
     end
