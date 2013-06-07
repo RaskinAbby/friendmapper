@@ -19,6 +19,13 @@ class AuthController < ApplicationController
     u = User.find_by_id(session[:user_id])
 
     u.facebook_access_token = token
+
+    me_url = "https://graph.facebook.com/me?access_token=#{token}"
+    me_result = JSON.parse(open(me_url).read)
+
+    u.name = me_result["name"]
+    u.facebook_id = me_result["id"]
+
     u.save
 
     redirect_to u

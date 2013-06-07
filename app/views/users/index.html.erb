@@ -18,11 +18,11 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.email, user %></td>
-        <td><%= user.facebook_access_token %></td>
+        <td><%= truncate(user.facebook_access_token) %></td>
         <td><%= user.facebook_id %></td>
         <td><%= user.name %></td>
         <td><%= user.location %></td>
-        <td><%=l user.created_at %></td>
+        <td><%= time_ago_in_words(user.created_at) %> ago</td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_path(user), :class => 'btn btn-mini' %>
