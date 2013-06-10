@@ -1,10 +1,28 @@
-# c = UsersController.new
-# c.create
-#
-
+require 'open-uri'
 
 class UsersController < ApplicationController
   before_filter :require_authorized_user, only: [:show, :edit, :update, :destroy]
+
+  def poll_facebook
+    url = "https://graph.facebook.com/me/friends?fields=location,id,name&access_token=#{current_user.facebook_access_token}"
+
+    result = JSON.parse(open(url).read)
+
+    friends = result["data"]
+
+    friends.each do |friend_hash|
+      if friend_hash["location"].present?
+        f = Friend.new
+        f.name = friend_hash["name"]
+        f.facebook_id = friend_hash["id"]
+        f.location = friend_hash["location"]["name"]
+        f.user = current_user
+        f.save
+      end
+    end
+
+    redirect_to current_user
+  end
 
   def require_authorized_user
     @user = User.find(params[:id])

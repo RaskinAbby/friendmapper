@@ -20,11 +20,12 @@ class AuthController < ApplicationController
 
     u.facebook_access_token = token
 
-    me_url = "https://graph.facebook.com/me?access_token=#{token}"
+    me_url = "https://graph.facebook.com/me?fields=name,id,location&access_token=#{token}"
     me_result = JSON.parse(open(me_url).read)
 
     u.name = me_result["name"]
     u.facebook_id = me_result["id"]
+    u.location = me_result["location"]["name"]
 
     u.save
 

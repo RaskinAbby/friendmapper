@@ -1,6 +1,8 @@
 Sandbox::Application.routes.draw do
   root to: 'Users#index'
 
+  get '/poll_facebook' => 'Users#poll_facebook', as: 'poll_facebook'
+
   get '/auth/facebook' => 'Auth#facebook'
 
   resource :session, only: [:new, :create, :destroy]
