@@ -32,7 +32,7 @@
               :class => 'btn btn-danger' %>
 </div>
 
-<%= gmaps4rails(@json) %>
+<%= gmaps("markers" => { data: @json, options: { do_clustering: true, randomize: true, max_random_distance: 10000 } }) %>
 
 <ul>
   <% @user.friends.each do |friend| %>
