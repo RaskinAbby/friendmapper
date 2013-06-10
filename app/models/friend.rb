@@ -9,6 +9,9 @@ class Friend < ActiveRecord::Base
   validates :location, presence: true
   validates :facebook_id, uniqueness: { scope: :user_id }
 
-  # Callbacks
+  acts_as_gmappable
 
+  def gmaps4rails_address
+    self.location
+  end
 end

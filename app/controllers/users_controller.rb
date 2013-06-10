@@ -47,6 +47,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @json = @user.friends.to_gmaps4rails
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }

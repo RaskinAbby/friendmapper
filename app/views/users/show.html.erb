@@ -32,6 +32,8 @@
               :class => 'btn btn-danger' %>
 </div>
 
+<%= gmaps4rails(@json) %>
+
 <ul>
   <% @user.friends.each do |friend| %>
     <li>
