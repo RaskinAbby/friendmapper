@@ -4,12 +4,14 @@ class UsersController < ApplicationController
   before_filter :require_authorized_user, only: [:show, :edit, :update, :destroy]
 
   def poll_facebook
+    # TODO move this stuff to a model somewhere
     url = "https://graph.facebook.com/me/friends?fields=location,id,name&access_token=#{current_user.facebook_access_token}"
 
     result = JSON.parse(open(url).read)
 
     friends = result["data"]
 
+    # OPTIMIZE change this to map instead of each
     friends.each do |friend_hash|
       if friend_hash["location"].present?
         f = Friend.new
